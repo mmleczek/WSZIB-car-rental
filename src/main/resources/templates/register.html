@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia samochodów</title>
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/login.css">
+    <script src="/register-validator.js"></script>
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="content">
+    <h1>Zarejestruj swoje konto</h1>
+    <form th:action="@{/register}" method="post" onsubmit="return validate()">
+        <div>
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" placeholder="Login"/>
+        </div>
+        <div>
+            <label for="name">Imię:</label>
+            <input type="text" id="name" name="name" placeholder="Imię"/>
+        </div>
+        <div>
+            <label for="surname">Nazwisko:</label>
+            <input type="text" id="surname" name="surname" placeholder="Nazwisko"/>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Hasło"/>
+        </div>
+        <div id="registerButton">
+            <button type="submit">Zarejestruj się</button>
+        </div>
+    </form>
+    <div th:if="${param.error}">
+        <p style="color:red;">Taki login już istnieje, wybierz inny login podczas rejestracji.</p>
+    </div>
+    <b style="color: red; display: none;" id="error"></b>
+</div>
+</body>
+</html>
+<style>
+    form div {
+        display: flex;
+        margin-bottom: 0.75rem;
+    }
+
+    #registerButton {
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        width: 7.5rem;
+    }
+</style>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia samochodów</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="orders.css">
+    <script>
+        function position_click(wrapper) {
+            inner_wrapper = wrapper.getElementsByClassName("position-wrapper")[0];
+            if(inner_wrapper.style.display == "block") {
+                inner_wrapper.style.display = "none";
+            } else {
+                inner_wrapper.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="content">
+    <div class="order-row">
+        <div>id</div>
+        <div>data</div>
+        <div>status</div>
+        <div>suma</div>
+    </div>
+
+        <div th:each="order : ${orders}" class="wrapper" onclick="position_click(this)">
+            <div class="order-row">
+                <div th:text="${order.id}"></div>
+                <div th:text="${order.getFormattedDate()}"></div>
+                <div th:text="${order.status}"></div>
+                <div th:text="${#numbers.formatDecimal(order.sum, 1, 2) + ' zł'}"></div>
+            </div>
+            <div class="position-wrapper">
+                <div class="cart-row">
+                    <div>Nazwa</div>
+                    <div>Marka</div>
+                    <div>Cena</div>
+                </div>
+                <div th:each="position : ${order.positions}" class="cart-row">
+                    <div th:text="${position.car.name}"></div>
+                    <div th:text="${position.car.brand}"></div>
+                    <div th:text="${#numbers.formatDecimal(position.car.price, 1, 2) + ' zł'}"></div>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>

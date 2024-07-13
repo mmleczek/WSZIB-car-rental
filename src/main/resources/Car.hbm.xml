@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "pl.edu.wszib.car.rental.model.Car" table = "tcar">
+        <id name = "id" type = "int" column = "id">
+            <generator class="identity"/>
+        </id>
+
+        <property name = "name" column = "name" type = "string"/>
+        <property name = "brand" column = "brand" type = "string"/>
+        <property name = "imgUrl" column = "imgUrl" type = "string"/>
+        <property name = "price" column = "price" type = "double"/>
+        <property name = "reserved" column = "reserved" type = "int"/>
+    </class>
+</hibernate-mapping>

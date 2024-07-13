@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia samochodów</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="content">
+    <form method="get">
+        <input type="text" name="pattern" th:value="${pattern}" class="text-field" placeholder="Szukaj">
+        <input type="submit" value="Szukaj" class="button">
+    </form>
+
+    <div class="car-container">
+        <div class="car" th:each="car : ${cars}">
+            <img th:src="${car.imgUrl}"/>
+            <div class="car-info">
+                <div class="car-name" th:text="${car.name}"></div>
+                <div class="car-brand" th:text="${car.brand}"></div>
+                <div class="car-price" th:text="${'Cena ' + car.price + ' zł'}"></div>
+                <b th:if="${session.user != null && car.reserved == 1}" style="color:red;">Zarezerwowany</b>
+                <a th:if="${session.user?.getRole() == T(pl.edu.wszib.car.rental.model.User.Role).ADMIN}" th:href="'/car/edit/' + ${car.id}">Edytuj</a>
+                <a th:if="${session.user != null && car.reserved == 0}" th:href="'/cart/add/' + ${car.id}">Dodaj do koszyka</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

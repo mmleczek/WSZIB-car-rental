@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczalnia samochodów</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+
+<div class="logo" id="logo" th:fragment="logo">
+    <a href="/">
+        <img id="logoImg" src="/logo.webp">
+    </a>
+    <h1>Wypożyczalnia samochodów</h1>
+</div>
+
+<div class="menu" id="menu" th:fragment="menu">
+    <a href="/" class="button">Strona Główna</a>
+    <a href="/contact" class="button">Kontakt</a>
+    <a href="/cart" th:if="${session.user != null}" class="button">Koszyk</a>
+    <a href="/order" th:if="${session.user != null}" class="button">Zamowienia</a>
+    <a href="/login" th:if="${session.user == null}" class="button">Zaloguj</a>
+    <a href="/register" th:if="${session.user == null}" class="button">Zarejestruj się</a>
+    <a href="/logout" th:if="${session.user != null}" class="button">Wyloguj</a>
+    <a href="/car/add" th:if="${session.user?.getRole() == T(pl.edu.wszib.car.rental.model.User.Role).ADMIN}" class="button">Dodaj samochód</a>
+</div>
+
+</body>
+</html>
